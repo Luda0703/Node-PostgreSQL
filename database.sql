@@ -5,6 +5,6 @@ CREATE TABLE person(
 
 CREATE TABLE gamer(
   id SERIAL PRIMARY KEY,
-  player_name VARCHAR(255) NOT NULL,
-  score INT NOT NULL
+  name VARCHAR(255) NOT NULL,
+  speed INTEGER NOT NULL
 );
