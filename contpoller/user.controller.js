@@ -2,10 +2,10 @@ const db = require("../db");
 
 class UserControllers {
   async createUser(req, res) {
-    const { name, surname } = req.body;
+    const { name } = req.body;
     const newPerson = await db.query(
-      `INSERT INTO person (name, surname) values($1, $2) RETURNING *`,
-      [name, surname]
+      `INSERT INTO person (name) values($1) RETURNING *`,
+      [name]
     );
     res.json(newPerson.rows[0]);
   }
@@ -19,10 +19,10 @@ class UserControllers {
     res.json(user.rows[0]);
   }
   async updateUser(req, res) {
-    const { id, name, surname } = req.body;
+    const { id, name } = req.body;
     const user = await db.query(
       'UPDATE person set name = $1, surname = $2, id = $3 RETURNING *',
-      [name, surname, id]
+      [name, id]
     );
     res.json(user.rows[0]);
   }
