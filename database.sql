@@ -2,9 +2,3 @@ CREATE TABLE person(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
 );
-
-CREATE TABLE gamer(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  speed INTEGER NOT NULL
-);

@@ -10,21 +10,14 @@ class UserControllers {
     res.json(newPerson.rows[0]);
   }
   async getUsers(req, res) {
-    const users = await db.query("SELECT * FROM person");
-    res.json(users.rows);
-  }
-  async getOneUser(req, res) {
-    const id = req.params.id;
-    const user = await db.query(`SELECT * FROM person where id = $1`, [id]);
-    res.json(user.rows[0]);
-  }
-  async updateUser(req, res) {
-    const { id, name } = req.body;
-    const user = await db.query(
-      'UPDATE person set name = $1, surname = $2, id = $3 RETURNING *',
-      [name, id]
-    );
-    res.json(user.rows[0]);
+    try {
+      const queryResult = await db.query("SELECT * FROM person");
+      const users = queryResult.rows;
+      res.json(users);
+    } catch (error) {
+      console.error('Ошибка при получении данных:', error);
+      res.status(500).json({ error: 'Ошибка при получении данных' });
+    }
   }
   async deleteUser(req, res) {
     const id = req.params.id;
